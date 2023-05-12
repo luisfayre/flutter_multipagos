@@ -1,3 +1,7 @@
+## 1.0.5
+
+- First version
+
 ## 0.0.4
 
 - Se agrega documentación

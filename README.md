@@ -1,11 +1,11 @@
 # Multipagos Flap BBVA
 
-<img src="./img/logo.png">
+<img src="https://raw.githubusercontent.com/luisfayre/flutter_multipagos/main/img/logo.png">
 
 
 ## Screenshot
 
-<img src="./img/multipagos.png">
+<img src="https://raw.githubusercontent.com/luisfayre/flutter_multipagos/main/img/multipagos.png">
 
 ## Get Started
 
