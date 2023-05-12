@@ -1,6 +1,6 @@
 name: flutter_multipagos
-description: Multipagos flutter
-version: 0.0.3
+description: Implementacion de BBVA Flap Multipagos en flutter
+version: 0.0.4
 homepage: https://github.com/luisfayre/flutter_multipagos
 repository: https://github.com/luisfayre/flutter_multipagos
 
