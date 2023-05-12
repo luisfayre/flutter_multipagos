@@ -1,8 +1,17 @@
-## 0.0.1
+## 0.0.3
 
-Primera versión
+- Se agrega documentación
 
 ## 0.0.2
 
 Corrección de errores y mejoras
+
+
+## 0.0.1
+
+Primera versión
+
+
+
+
 
