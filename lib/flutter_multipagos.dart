@@ -9,11 +9,21 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:http/http.dart' as http;
 
 class Multipagos extends StatefulWidget {
+  final PreferredSizeWidget? appBar;
+  final void Function()? actionSuccess;
+  final void Function()? actionFail;
   final MultipagosRequest multipagos;
   final String bbvaEnv;
   final String title;
-  const Multipagos(
-      {super.key, required this.multipagos, required this.bbvaEnv, required this.title});
+  const Multipagos({
+    super.key,
+    required this.multipagos,
+    required this.bbvaEnv,
+    required this.title,
+    this.actionSuccess,
+    this.actionFail,
+    this.appBar,
+  });
 
   @override
   _MultipagosState createState() => _MultipagosState();
@@ -42,15 +52,7 @@ class _MultipagosState extends State<Multipagos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(Icons.close),
-        ),
-        title: Text(widget.title),
-      ),
+      appBar:  widget.appBar,
       body: SafeArea(
         child: Column(
           children: [
@@ -75,15 +77,17 @@ class _MultipagosState extends State<Multipagos> {
                                 (NavigationRequest request) async {
                               if (request.url
                                   .startsWith(widget.multipagos.mpUrlsucces)) {
-                                print(["COMPLETADO", request.url]);
-                                // Navigator.of(context).pop();
-                                return NavigationDecision.prevent;
+                                if (widget.actionSuccess != null) {
+                                  widget.actionSuccess!();
+                                }
+                                return NavigationDecision.navigate;
                               }
                               if (request.url
                                   .startsWith(widget.multipagos.mpUrlFailure)) {
-                                print(["FAIL PAGO", request.url]);
-                                // Navigator.of(context).pop();
-                                return NavigationDecision.prevent;
+                                if (widget.actionFail != null) {
+                                  widget.actionFail!();
+                                }
+                                return NavigationDecision.navigate;
                               }
                               return NavigationDecision.navigate;
                             },
@@ -107,8 +111,8 @@ class _MultipagosState extends State<Multipagos> {
     };
 
     try {
-      final res =
-          await http.post(Uri.parse(url),body: request.toJson(), headers: headers);
+      final res = await http.post(Uri.parse(url),
+          body: request.toJson(), headers: headers);
       htmlString = res.body;
       cargando = true;
       setState(() {});

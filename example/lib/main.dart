@@ -56,17 +56,31 @@ class _MyHomePageState extends State<MyHomePage> {
         "b3f5f7431983df4892b572e4dd0c16817e76077e0b668cd53786e470860567f8",
     mpUrlFailure: "URL Pago no  exitoso del cliente",
     mpUrlsucces: "URL Pago exitoso del cliente",
-    mpCustomername: "",
-    mpEmail: "",
-    mpPhone: "",
   );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Multipagos(
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.close),
+              ),
+              title: Text(widget.title),
+            ),
             title: widget.title,
             multipagos: requestMultipagos,
+            actionSuccess: () {
+              print("Succes");
+              Navigator.pop(context);
+            },
+            actionFail: () {
+              print("Fail");
+              Navigator.pop(context);
+            },
             bbvaEnv: url));
   }
 }
